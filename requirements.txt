@@ -1,0 +1,44 @@
+absl-py==0.10.0
+astor==0.8.1
+certifi==2020.6.20
+cffi @ file:///C:/ci/cffi_1606255207413/work
+chardet==3.0.4
+decorator==4.4.2
+defusedxml==0.6.0
+facenet-pytorch==2.5.1
+google-pasta==0.2.0
+graphviz==0.8.4
+grpcio==1.32.0
+h5py==2.10.0
+idna==2.6
+importlib-metadata==2.0.0
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.2
+Markdown==3.3.1
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+mysql-connector-python==8.0.22
+networkx==2.5
+numpy==1.18.5
+olefile==0.46
+onnx==1.7.0
+opencv-contrib-python==4.5.1.48
+opencv-python==4.5.1.48
+opt-einsum==3.3.0
+Pillow @ file:///C:/ci/pillow_1602782968170/work
+protobuf==3.13.0
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+PyYAML==5.3.1
+requests==2.25.1
+six==1.15.0
+termcolor==1.1.0
+test-generator==0.1.1
+torch==1.4.0
+torchvision==0.5.0
+typing-extensions==3.7.4.3
+urllib3==1.22
+Werkzeug==1.0.1
+wincertstore==0.2
+wrapt==1.12.1
+zipp==3.3.0
