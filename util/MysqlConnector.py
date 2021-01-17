@@ -18,14 +18,24 @@ def decode(users_embedding):
 class MysqlConnector:
 
     # initialize database and makes cursor
-    def __init__(self, host, user, password, database):
-        self.database = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-        self.cursor = self.database.cursor()
+    def __init__(self, host, user, password, database=None):
+
+        if database is None:
+            self.database = mysql.connector.connect(
+                host=host,
+                user=user,
+                password=password,
+            )
+            self.cursor = self.database.cursor()
+
+        else:
+            self.database = mysql.connector.connect(
+                host=host,
+                user=user,
+                password=password,
+                database=database
+            )
+            self.cursor = self.database.cursor()
 
     # Uploads users list to database.
     # List format -> [name, Tensor object]
@@ -57,3 +67,14 @@ class MysqlConnector:
                 flag = True
 
         return flag
+
+    def create_new_database(self, database_name):
+        self.cursor.execute("CREATE DATABASE " + database_name)
+        self.database.database = database_name
+        print(database_name + " was created")
+
+    def create_project_tables(self):
+        self.cursor.execute(
+            "CREATE TABLE users (name_surname varchar(150) not null,embedding text not null,access tinyint(1) null)"
+            "")
+        print("the tables has been created")

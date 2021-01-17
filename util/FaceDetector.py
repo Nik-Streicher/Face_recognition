@@ -52,8 +52,8 @@ def draw_bounding_box(boxes, recognized_users, pil_image, font_path, font_size):
 
 # converts PIL image to CV format
 def convert_to_cv(pil_image):
-    cvImage = numpy.array(pil_image)
-    return cvImage[:, :, ::-1].copy()
+    cv_image = numpy.array(pil_image)
+    return cv_image[:, :, ::-1].copy()
 
 
 class FaceDetector:
