@@ -6,7 +6,8 @@ from util.MysqlConnector import MysqlConnector, encode
 
 detector = FaceDetector()
 
-tested_image = Image.open("../images/multi/3.jpg")
+tested_image = Image.open(input("Enter image path: "))
+#  -> tested image path ../images/multi/3.jpg
 #  -> invalid picture path ../images/invalid/1.jpg
 
 mtcnn = detector.mtcnn(tested_image)
