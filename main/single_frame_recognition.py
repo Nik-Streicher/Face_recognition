@@ -1,8 +1,12 @@
 from PIL import Image
 import cv2
+import sys
+from os import path
 
-from util.FaceDetector import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
-from util.MysqlConnector import MysqlConnector, encode, return_data_from_the_file
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+
+from util import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
+from util import MysqlConnector, encode, return_data_from_the_file
 
 detector = FaceDetector()
 
@@ -27,7 +31,7 @@ if mtcnn is not None:
     boxes, _ = detector.mtcnn.detect(tested_image)
 
     tested_image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=tested_image,
-                                     font_path='arial.ttf',
+                                     font_path='../arial.ttf',
                                      font_size=17)
 else:
     print("no face was detected")

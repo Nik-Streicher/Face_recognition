@@ -1,6 +1,11 @@
-from util.FaceDetector import FaceDetector
-from util.Loader import Loader
-from util.MysqlConnector import MysqlConnector, return_data_from_the_file
+import sys
+from os import path
+
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+
+from util import FaceDetector
+from util import Loader
+from util import MysqlConnector, return_data_from_the_file
 
 detector = FaceDetector()
 

@@ -1,4 +1,9 @@
-from util.MysqlConnector import MysqlConnector
+import sys
+from os import path
+
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+
+from util import MysqlConnector
 
 connector = MysqlConnector(host="localhost", user="python_user", password="password")
 

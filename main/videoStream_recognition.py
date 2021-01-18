@@ -1,9 +1,13 @@
+import sys
+from os import path
+
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+
 from PIL import Image
 import cv2
-import sys
 
-from util.FaceDetector import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
-from util.MysqlConnector import MysqlConnector, encode, return_data_from_the_file
+from util import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
+from util import MysqlConnector, encode, return_data_from_the_file
 
 detector = FaceDetector()
 
