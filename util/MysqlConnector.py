@@ -15,6 +15,19 @@ def decode(users_embedding):
     return pickle.dumps(users_embedding).decode('ISO-8859-1')
 
 
+def return_data_from_the_file(data_path):
+    file = open(data_path, "rt")
+    host = file.readline()
+    user = file.readline()
+    password = file.readline()
+    database = file.readline()
+    file.close()
+    return host[host.find("=") + 2::].replace('\n', ''), \
+           user[user.find("=") + 2::].replace('\n', ''), \
+           password[password.find("=") + 2::].replace('\n', ''), \
+           database[database.find("=") + 2::].replace('\n', '')
+
+
 class MysqlConnector:
 
     # initialize database and makes cursor

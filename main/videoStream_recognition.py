@@ -3,11 +3,12 @@ import cv2
 import sys
 
 from util.FaceDetector import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
-from util.MysqlConnector import MysqlConnector, encode
+from util.MysqlConnector import MysqlConnector, encode, return_data_from_the_file
 
 detector = FaceDetector()
 
-mysql = MysqlConnector(host="localhost", user="python_user", password="password", database="python_project")
+host, user, password, database = return_data_from_the_file("../database_data.txt")
+mysql = MysqlConnector(host=host, user=user, password=password, database=database)
 database_users = mysql.select_all_users()
 
 users = encode(database_users=database_users)

@@ -1,0 +1,4 @@
+Host = localhost
+User = python_user
+Password = password
+database name = python_project
