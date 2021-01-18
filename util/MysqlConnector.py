@@ -16,16 +16,10 @@ def decode(users_embedding):
 
 
 def return_data_from_the_file(data_path):
-    file = open(data_path, "rt")
-    host = file.readline()
-    user = file.readline()
-    password = file.readline()
-    database = file.readline()
+    file = open(data_path)
+    array = [x[x.find("=") + 2::].replace('\n', '') for x in file]
     file.close()
-    return host[host.find("=") + 2::].replace('\n', ''), \
-           user[user.find("=") + 2::].replace('\n', ''), \
-           password[password.find("=") + 2::].replace('\n', ''), \
-           database[database.find("=") + 2::].replace('\n', '')
+    return array
 
 
 class MysqlConnector:
