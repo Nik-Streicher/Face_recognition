@@ -1,4 +1,4 @@
-#Face recognition
+# Face recognition
 
 Program for keeping records of persons by using camera systems. 
 Based on face recognition, it evaluates a person's identity and verification.
@@ -14,10 +14,10 @@ Available programs
 
 Example
 ---
-###Before
+### Before
 ![markdown logo](images/multi/3.jpg)
 
-###After
+### After
 ![markdown logo](images/recognized/3.PNG)
 
 Tested on the system
