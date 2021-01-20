@@ -1,12 +1,14 @@
 import pickle
 
 import mysql.connector
+from .User import User
 
 
 # encodes to bytes and deserialize and return database users table in format
 # [[name, users embedding, access(True or False)], ...]
 def encode(database_users):
-    return [[num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2] == 1] for num in database_users]
+    return [User(num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2] == 1) for num in database_users]
+    # return [[num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2] == 1] for num in database_users]
 
 
 # list format -> [name, embedding]
@@ -45,14 +47,14 @@ class MysqlConnector:
             self.cursor = self.database.cursor()
 
     # Uploads users list to database.
-    # List format -> [name, Tensor object]
+    # List format -> [User(name, embedding, access)]
     def upload_dataset(self, users):
         for x in users:
             if self.find_duplicates(x[1]):
                 pass
             else:
                 sql = "INSERT INTO users (name_surname, embedding, access) VALUES (%s, %s, %s)"
-                val = x[0], decode(users_embedding=x[1]), True
+                val = x.get_name, decode(users_embedding=x.get_embedding), x.get_access
 
                 self.cursor.execute(sql, val)
 

@@ -9,7 +9,8 @@ from util import MysqlConnector, return_data_from_the_file
 
 detector = FaceDetector()
 
-host, user, password, database = return_data_from_the_file("../database_data.txt")
+# initialize parameters from config.txt
+host, user, password, database = return_data_from_the_file("../config.txt")
 mysql = MysqlConnector(host=host, user=user, password=password, database=database)
 
 loader = Loader(dataset_path=input("Enter dataset path: "))

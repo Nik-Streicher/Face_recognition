@@ -16,9 +16,9 @@ def recognize_users(face_embedding, users, distance):
         flag = True
         recognized_user = []
         for x in users:
-            if (y - x[1]).norm().item() < distance:
-                print(x[0], x[2])
-                recognized_user = [x[0], str(x[2])]
+            if (y - x.get_embedding()).norm().item() < distance:
+
+                recognized_user = [x.get_name(), str(x.get_access())]
                 flag = False
 
         if flag:
@@ -26,7 +26,6 @@ def recognize_users(face_embedding, users, distance):
         else:
             recognized_users.append(recognized_user)
 
-    print(recognized_users)
     return recognized_users
 
 
@@ -58,7 +57,7 @@ def convert_to_cv(pil_image):
 
 class FaceDetector:
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    print(device)
+    print(f"runs on {device}")
 
     mtcnn = MTCNN(keep_all=True, device=device)
     resnet = InceptionResnetV1(pretrained='vggface2').eval()

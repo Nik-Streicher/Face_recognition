@@ -11,8 +11,10 @@ from util import MysqlConnector, encode, return_data_from_the_file
 
 detector = FaceDetector()
 
-host, user, password, database = return_data_from_the_file("../database_data.txt")
+# initialize parameters from config.txt
+host, user, password, database = return_data_from_the_file("../config.txt")
 mysql = MysqlConnector(host=host, user=user, password=password, database=database)
+
 database_users = mysql.select_all_users()
 
 users = encode(database_users=database_users)
@@ -40,9 +42,8 @@ while True:
                               font_size=17)
 
     counter += 1
-    print(counter)
 
-    if counter == 90:
+    if counter == 45:
         counter = 0
 
     # display and close window

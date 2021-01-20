@@ -3,6 +3,8 @@ import os
 from torch.utils.data import DataLoader
 from torchvision import datasets
 
+from .User import User
+
 
 class Loader:
 
@@ -12,7 +14,7 @@ class Loader:
         self.workers = 0 if os.name == 'nt' else 4
         self.dataset = datasets.ImageFolder(dataset_path)
 
-    # loads dataset and return as list in format -> [user, users embedding]
+    # loads dataset and return as list of User()
     def load(self, mtcnn, resnet, users):
 
         def collate_fn(val):
@@ -26,5 +28,6 @@ class Loader:
 
             # if a face is detected makes user embedding
             if x_aligned is not None:
-                users.append([self.dataset.idx_to_class[y], resnet(x_aligned)])
+                users.append(User(self.dataset.idx_to_class[y], resnet(x_aligned), True))
+
         return users
