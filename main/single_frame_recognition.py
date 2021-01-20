@@ -36,5 +36,5 @@ if mtcnn is not None:
 else:
     print("no face was detected")
 
-cv2.imshow("Recognized Image", convert_to_cv(pil_image=tested_image))
+cv2.imshow("recognized Image", convert_to_cv(pil_image=tested_image))
 cv2.waitKey(0)
