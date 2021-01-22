@@ -1,7 +1,7 @@
 # Face recognition
 
 Program for keeping records of people by using camera systems. 
-Based on face recognition, it verified a person's identity and verification.
+Based on face recognition, it verifies a person's identity and access level.
 
 **Now only for windows**
 
