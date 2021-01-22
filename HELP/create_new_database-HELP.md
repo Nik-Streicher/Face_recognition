@@ -13,4 +13,5 @@ After configuration, run the file and enter the name of your future database
 if everything went well you will see a message of completion, and a database will be created, with your name chosen.
 
 ![markdown logo](Images/CND_run.PNG)
+
 ![markdown logo](Images/createdDatabase.PNG)

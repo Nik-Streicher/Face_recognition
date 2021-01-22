@@ -9,8 +9,11 @@ In a file 'videoStream_recognition.py'
 v_cap = cv2.VideoCapture(0)
 v_cap = cv2.VideoCapture('folder/my_video.mp4')
 ```
+
 ![markdown logo](../images/recognized/1.PNG)
+
 press ' f ' to close
+
 ![markdown logo](Images/VSR_run.PNG)
 
 

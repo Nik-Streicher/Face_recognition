@@ -10,5 +10,6 @@ The dataset must be in the format: dataset folder, folders with a username, imag
 ![markdown logo](Images/dataset.PNG)
 
 Run and enter the path of your dataset
+
 ![markdown logo](Images/dataset_run.PNG)
 
