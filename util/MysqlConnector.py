@@ -50,7 +50,7 @@ class MysqlConnector:
     # List format -> [User(name, embedding, access)]
     def upload_dataset(self, users):
         for x in users:
-            if self.find_duplicates(x[1]):
+            if self.find_duplicates(x.get_embedding()):
                 pass
             else:
                 sql = "INSERT INTO users (name_surname, embedding, access) VALUES (%s, %s, %s)"
@@ -70,9 +70,8 @@ class MysqlConnector:
     # looks for duplicates
     def find_duplicates(self, inserted_embedding):
         flag = False
-
         for y in encode(self.select_all_users()):
-            if (inserted_embedding - y[1]).norm().item() == 0:
+            if (inserted_embedding - y.get_embedding()).norm().item() == 0:
                 flag = True
 
         return flag

@@ -47,7 +47,7 @@ while True:
         counter = 0
 
     # display and close window
-    cv2.imshow("test", convert_to_cv(image))
-    if cv2.waitKey(1) & 0xFF == ord('g'):
+    cv2.imshow("Video", convert_to_cv(image))
+    if cv2.waitKey(1) & 0xFF == ord('f'):
         print("Program has been closed")
         sys.exit()
