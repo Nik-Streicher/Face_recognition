@@ -1,16 +1,21 @@
 # How to use single_frame_recognition.py
 
-The file is used to recognize people in the embedded image,
-**before running you must have the settings "config.txt"**,
-and the created database with upload dataset.
+The file is used to identify people in the embedded image,
 
-When started, enter the path to the image you want to recognize.
+**Before running you must set up a database with an uploaded dataset,
+and configure database settings in "config.txt".**
+
+---
+When starting the program, 
+enter the path to the image you want to use.
+
 
 ![markdown logo](Images/face_reco.PNG)
 
+----
 If there is no face on the picture, the program will inform you.
 
 If users who are not in the database, are on the picture,
-they will be marked as unknown
+they will be labeled as unknown
 
 ![markdown logo](../images/recognized/3.PNG)

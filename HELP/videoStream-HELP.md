@@ -2,6 +2,7 @@
 
 The file is used to recognize people from the video stream.
 
+----
 By default, it's set to analyse a video stream from the device camera. To change this setting,
 replace 0 with the path to the video.
 

@@ -6,10 +6,12 @@
 
 The program handles duplicates.
 
+---
 The dataset must be in the format: dataset folder, folders with a username, images
 ![markdown logo](Images/dataset.PNG)
+---
+After starting the program enter the path to the dataset.
 
-Run and enter the path of your dataset
 
 ![markdown logo](Images/dataset_run.PNG)
 

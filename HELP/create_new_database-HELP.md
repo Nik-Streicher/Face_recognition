@@ -4,13 +4,14 @@
 
 The "config.txt" file is used to set the database parameters.
 
-In the format : parameter name, space, equality sign, space, your name.
+Format : parameter name, space, equality sign, space, your name.
 
 ![markdown logo](Images/config.PNG)
 
-After configuration, run the file and enter the name of your future database
+After configuring "config.txt", run the script and enter the name of your future database
 
-if everything went well you will see a message of completion, and a database will be created, with your name chosen.
+---
+You will be rewarded with a message of completion and a database, with the name you chose.
 
 ![markdown logo](Images/CND_run.PNG)
 
