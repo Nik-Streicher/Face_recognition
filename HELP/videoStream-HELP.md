@@ -1,8 +1,9 @@
 # How to use videoStream_recognition.py
 
 The file is used to recognize people from the video stream.
-By default, the setting is for the video from the camera, to change, 
-enter the path to the video instead of 0.
+
+By default, it's set to analyse a video stream from the device camera. To change this setting,
+replace 0 with the path to the video.
 
 In a file 'videoStream_recognition.py'
 ```python

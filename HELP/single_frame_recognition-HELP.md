@@ -8,8 +8,9 @@ When started, enter the path to the image you want to recognize.
 
 ![markdown logo](Images/face_reco.PNG)
 
-If there is no face in the picture, the program will print it.
+If there is no face on the picture, the program will inform you.
 
-If users who are not in the database, are in the picture, they will be marked as unknown
+If users who are not in the database, are on the picture,
+they will be marked as unknown
 
 ![markdown logo](../images/recognized/3.PNG)
