@@ -3,13 +3,19 @@ from os import path
 
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
-from util import MysqlConnector, return_data_from_the_file
+from util import MysqlConnector
+from Config import *
 
-# initialize parameters from config.txt
-host, user, password, _ = return_data_from_the_file("../config.txt")
 
-connector = MysqlConnector(host=host, user=user, password=password)
+def run(database_name):
 
-connector.create_new_database(database_name=input("enter database name: "))
-# database name -> "test_database"
-connector.create_project_tables()
+    # initialize parameters from Config.py
+    connector = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password)
+
+    connector.create_new_database(database_name=database_name)
+    # database name -> "test_database"
+    connector.create_project_tables()
+
+
+if __name__ == "__main__":
+    run(input("enter database name: "))

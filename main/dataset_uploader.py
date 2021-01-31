@@ -5,18 +5,24 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
 from util import FaceDetector
 from util import Loader
-from util import MysqlConnector, return_data_from_the_file
+from util import MysqlConnector
+from Config import *
 
-detector = FaceDetector()
 
-# initialize parameters from config.txt
-host, user, password, database = return_data_from_the_file("../config.txt")
-mysql = MysqlConnector(host=host, user=user, password=password, database=database)
+def run(dataset_path):
+    detector = FaceDetector()
 
-loader = Loader(dataset_path=input("Enter dataset path: "))
-# my dataset path -> D:/dataset
-users = []
+    # initialize parameters from config.txt
+    mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password, database=Config.Database_name)
 
-users = loader.load(mtcnn=detector.mtcnn, resnet=detector.resnet, users=users)
+    loader = Loader(dataset_path=dataset_path)
+    # my dataset path -> D:/dataset
+    users = []
 
-mysql.upload_dataset(users)
+    users = loader.load(mtcnn=detector.mtcnn, resnet=detector.resnet, users=users)
+
+    mysql.upload_dataset(users)
+
+
+if __name__ == '__main__':
+    run(input("Enter dataset path: "))

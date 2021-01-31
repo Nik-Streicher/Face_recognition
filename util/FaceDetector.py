@@ -1,10 +1,12 @@
+import platform
 import numpy
 import torch
 from PIL import ImageFont, ImageDraw
 from facenet_pytorch import MTCNN, InceptionResnetV1
 import ctypes
 
-ctypes.cdll.LoadLibrary('caffe2_nvrtc.dll')
+if platform.system() == 'Windows':
+    ctypes.cdll.LoadLibrary('caffe2_nvrtc.dll')
 
 
 # return list of recognized users in format -> [name, access]
@@ -17,7 +19,6 @@ def recognize_users(face_embedding, users, distance):
         recognized_user = []
         for x in users:
             if (y - x.get_embedding()).norm().item() < distance:
-
                 recognized_user = [x.get_name(), str(x.get_access())]
                 flag = False
 

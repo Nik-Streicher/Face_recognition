@@ -7,47 +7,53 @@ from PIL import Image
 import cv2
 
 from util import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
-from util import MysqlConnector, encode, return_data_from_the_file
+from util import MysqlConnector, encode
+from Config import *
 
-detector = FaceDetector()
 
-# initialize parameters from config.txt
-host, user, password, database = return_data_from_the_file("../config.txt")
-mysql = MysqlConnector(host=host, user=user, password=password, database=database)
+def run(font, distance=0.9, detection_delay=45, font_size=17, video_path=0):
+    detector = FaceDetector()
 
-database_users = mysql.select_all_users()
+    # initialize parameters from Config.py
+    mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password, database=Config.Database_name)
 
-users = encode(database_users=database_users)
+    database_users = mysql.select_all_users()
 
-v_cap = cv2.VideoCapture(0)
+    users = encode(database_users=database_users)
 
-boxes = None
-img_embedding = []
-recognized_users = []
-counter = 0
-while True:
-    success, img = v_cap.read()
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = Image.fromarray(img)
-    boxes, _ = detector.mtcnn.detect(img)
+    v_cap = cv2.VideoCapture(video_path)
 
-    detect = detector.mtcnn(img)
-    if counter == 0:
-        if detect is not None:
-            img_embedding = detector.resnet(detect)
-            recognized_users = recognize_users(face_embedding=img_embedding, users=users, distance=0.9)
+    boxes = None
+    img_embedding = []
+    recognized_users = []
+    counter = 0
+    while True:
+        success, img = v_cap.read()
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = Image.fromarray(img)
+        boxes, _ = detector.mtcnn.detect(img)
 
-    image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=img,
-                              font_path='arial.ttf',
-                              font_size=17)
+        detect = detector.mtcnn(img)
+        if counter == 0:
+            if detect is not None:
+                img_embedding = detector.resnet(detect)
+                recognized_users = recognize_users(face_embedding=img_embedding, users=users, distance=distance)
 
-    counter += 1
+        image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=img,
+                                  font_path=font,
+                                  font_size=font_size)
 
-    if counter == 45:
-        counter = 0
+        counter += 1
 
-    # display and close window
-    cv2.imshow("Video", convert_to_cv(image))
-    if cv2.waitKey(1) & 0xFF == ord('f'):
-        print("Program has been closed")
-        sys.exit()
+        if counter == detection_delay:
+            counter = 0
+
+        # display and close window
+        cv2.imshow("Video", convert_to_cv(image))
+        if cv2.waitKey(1) & 0xFF == ord('f'):
+            print("Program has been closed")
+            sys.exit()
+
+
+if __name__ == '__main__':
+    run(font='arial.ttf')

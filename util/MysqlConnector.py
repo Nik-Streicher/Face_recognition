@@ -17,13 +17,6 @@ def decode(users_embedding):
     return pickle.dumps(users_embedding).decode('ISO-8859-1')
 
 
-def return_data_from_the_file(data_path):
-    file = open(data_path)
-    array = [x[x.find("=") + 2::].replace('\n', '') for x in file]
-    file.close()
-    return array
-
-
 class MysqlConnector:
 
     # initialize database and makes cursor
@@ -54,7 +47,7 @@ class MysqlConnector:
                 pass
             else:
                 sql = "INSERT INTO users (name_surname, embedding, access) VALUES (%s, %s, %s)"
-                val = x.get_name, decode(users_embedding=x.get_embedding), x.get_access
+                val = x.get_name(), decode(users_embedding=x.get_embedding()), x.get_access()
 
                 self.cursor.execute(sql, val)
 
