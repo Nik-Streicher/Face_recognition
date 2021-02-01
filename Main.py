@@ -36,7 +36,7 @@ class Main:
     def recognize_image(self, image_path, font='arial.ttf', distance=0.9, font_size=17):
         detector = FaceDetector()
         tested_image = Image.open(image_path)
-        #  tested image path -> ../images/multi/2.jpg
+        #  tested image path -> ../images/multi/4.jpg
         #  invalid picture path ->  ../images/invalid/1.jpg
 
         mtcnn = detector.mtcnn(tested_image)

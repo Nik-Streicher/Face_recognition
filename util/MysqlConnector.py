@@ -2,6 +2,7 @@ import pickle
 
 import mysql.connector
 from .User import User
+from tqdm import tqdm
 
 
 # encodes to bytes and deserialize and return database users table in format
@@ -42,7 +43,7 @@ class MysqlConnector:
     # Uploads users list to database.
     # List format -> [User(name, embedding, access)]
     def upload_dataset(self, users):
-        for x in users:
+        for x in tqdm(users, desc="Uploading dataset", position=0):
             if self.find_duplicates(x.get_embedding()):
                 pass
             else:
@@ -63,7 +64,7 @@ class MysqlConnector:
     # looks for duplicates
     def find_duplicates(self, inserted_embedding):
         flag = False
-        for y in encode(self.select_all_users()):
+        for y in tqdm(encode(self.select_all_users()), desc="checking for duplicates", position=0):
             if (inserted_embedding - y.get_embedding()).norm().item() == 0:
                 flag = True
 

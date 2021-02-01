@@ -5,6 +5,7 @@ from PIL import ImageFont, ImageDraw
 from facenet_pytorch import MTCNN, InceptionResnetV1
 import ctypes
 
+
 if platform.system() == 'Windows':
     ctypes.cdll.LoadLibrary('caffe2_nvrtc.dll')
 

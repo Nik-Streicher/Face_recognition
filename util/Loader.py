@@ -2,6 +2,7 @@ import os
 
 from torch.utils.data import DataLoader
 from torchvision import datasets
+from tqdm import tqdm
 
 from .User import User
 
@@ -23,7 +24,7 @@ class Loader:
         self.dataset.idx_to_class = {i: c for c, i in self.dataset.class_to_idx.items()}
         loader = DataLoader(self.dataset, collate_fn=collate_fn, num_workers=self.workers)
 
-        for x, y in loader:
+        for x, y in tqdm(loader, desc="Loading dataset", position=0):
             x_aligned = mtcnn(x)
 
             # if a face is detected makes user embedding
