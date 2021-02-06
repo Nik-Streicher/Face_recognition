@@ -10,7 +10,7 @@ from Config import *
 def run(database_name):
 
     # initialize parameters from Config.py
-    connector = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password)
+    connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password)
 
     connector.create_new_database(database_name=database_name)
     # database name -> "test_database"

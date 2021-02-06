@@ -13,7 +13,7 @@ def run(dataset_path):
     detector = FaceDetector()
 
     # initialize parameters from config.txt
-    mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password, database=Config.Database_name)
+    mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password, database=Config.database_name)
 
     loader = Loader(dataset_path=dataset_path)
     # my dataset path -> D:/dataset

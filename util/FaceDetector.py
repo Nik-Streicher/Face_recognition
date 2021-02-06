@@ -5,7 +5,6 @@ from PIL import ImageFont, ImageDraw
 from facenet_pytorch import MTCNN, InceptionResnetV1
 import ctypes
 
-
 if platform.system() == 'Windows':
     ctypes.cdll.LoadLibrary('caffe2_nvrtc.dll')
 
@@ -20,7 +19,8 @@ def recognize_users(face_embedding, users, distance):
         recognized_user = []
         for x in users:
             if (y - x.get_embedding()).norm().item() < distance:
-                recognized_user = [x.get_name(), str(x.get_access())]
+                # rewrite get_access
+                recognized_user = [x.get_name(), x.get_access()]
                 flag = False
 
         if flag:
@@ -45,7 +45,7 @@ def draw_bounding_box(boxes, recognized_users, pil_image, font_path, font_size):
 
             if (counter + 1) <= len(recognized_users):
                 draw.text((a + 5, b + 3), recognized_users[counter][0], font=font_type)
-                draw.text((c - 43, d - 20), recognized_users[counter][1], font=font_type)
+                draw.text((c - 80, d - 20), recognized_users[counter][1], font=font_type)
                 counter += 1
 
     return img_draw

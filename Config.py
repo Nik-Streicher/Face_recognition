@@ -1,5 +1,5 @@
 class Config:
-    Host = 'localhost'
-    User = 'python_user'
-    Password = 'password'
-    Database_name = 'python_project'
+    host = 'localhost'
+    user = 'python_user'
+    password = 'password'
+    database_name = 'python_project'

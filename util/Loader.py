@@ -29,6 +29,6 @@ class Loader:
 
             # if a face is detected makes user embedding
             if x_aligned is not None:
-                users.append(User(self.dataset.idx_to_class[y], resnet(x_aligned), True))
+                users.append(User(self.dataset.idx_to_class[y], resnet(x_aligned), "Allowed"))
 
         return users

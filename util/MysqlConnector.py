@@ -8,8 +8,7 @@ from tqdm import tqdm
 # encodes to bytes and deserialize and return database users table in format
 # [[name, users embedding, access(True or False)], ...]
 def encode(database_users):
-    return [User(num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2] == 1) for num in database_users]
-    # return [[num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2] == 1] for num in database_users]
+    return [User(num[0], pickle.loads(num[1].encode('ISO-8859-1')), num[2]) for num in database_users]
 
 
 # list format -> [name, embedding]
@@ -22,7 +21,6 @@ class MysqlConnector:
 
     # initialize database and makes cursor
     def __init__(self, host, user, password, database=None):
-
         if database is None:
             self.database = mysql.connector.connect(
                 host=host,
@@ -77,6 +75,18 @@ class MysqlConnector:
 
     def create_project_tables(self):
         self.cursor.execute(
-            "CREATE TABLE users (name_surname varchar(150) not null,embedding text not null,access tinyint(1) null)"
+            "CREATE TABLE users (name_surname varchar(150) not null,embedding text not null,access varchar (25) null)"
             "")
         print("the tables has been created")
+
+    def change_access(self, name, new_status):
+        query = "UPDATE users SET access = %s WHERE name_surname LIKE %s"
+
+        if new_status:
+            val = "Allowed"
+        else:
+            val = "Forbidden"
+
+        self.cursor.execute(query, (val, name))
+        self.database.commit()
+        print("Status updated")

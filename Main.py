@@ -2,6 +2,7 @@ from util import FaceDetector, recognize_users, draw_bounding_box, convert_to_cv
 from util import Loader
 from util import MysqlConnector, encode
 from Config import *
+from Settings import *
 from fire import Fire
 from PIL import Image
 import cv2
@@ -12,7 +13,7 @@ class Main:
 
     def create(self, database_name):
         # initialize parameters from Config.py
-        connector = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password)
+        connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password)
 
         connector.create_new_database(database_name=database_name)
         # database name -> "test_database"
@@ -22,8 +23,8 @@ class Main:
         detector = FaceDetector()
 
         # initialize parameters from config.txt
-        mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password,
-                               database=Config.Database_name)
+        mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                               database=Config.database_name)
 
         loader = Loader(dataset_path=dataset_path)
         # my dataset path -> D:/dataset
@@ -33,11 +34,11 @@ class Main:
 
         mysql.upload_dataset(users)
 
-    def recognize_image(self, image_path, font='arial.ttf', distance=0.9, font_size=17):
+    def recognize_image(self, image_path, font=Settings.font, distance=Settings.distance, font_size=Settings.font_size):
         detector = FaceDetector()
         tested_image = Image.open(image_path)
-        #  tested image path -> ../images/multi/4.jpg
-        #  invalid picture path ->  ../images/invalid/1.jpg
+        #  tested image path -> images/multi/4.jpg
+        #  invalid picture path ->  images/invalid/1.jpg
 
         mtcnn = detector.mtcnn(tested_image)
 
@@ -45,8 +46,8 @@ class Main:
             tested_image_embedding = detector.resnet(mtcnn)
 
             # initialize parameters from config.txt
-            mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password,
-                                   database=Config.Database_name)
+            mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                                   database=Config.database_name)
 
             database_users = mysql.select_all_users()
 
@@ -65,12 +66,13 @@ class Main:
         cv2.imshow("recognized Image", convert_to_cv(pil_image=tested_image))
         cv2.waitKey(0)
 
-    def recognize_stream(self, font='arial.ttf', distance=0.9, detection_delay=45, font_size=17, path_to_video=0):
+    def recognize_stream(self, font=Settings.font, distance=Settings.distance, detection_delay=Settings.detection_delay,
+                         font_size=Settings.font_size, path_to_video=Settings.path_to_video):
         detector = FaceDetector()
 
         # initialize parameters from Config.py
-        mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password,
-                               database=Config.Database_name)
+        mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                               database=Config.database_name)
 
         database_users = mysql.select_all_users()
 
@@ -108,6 +110,15 @@ class Main:
             if cv2.waitKey(1) & 0xFF == ord('f'):
                 print("Program has been closed")
                 sys.exit()
+
+    def update_access(self, name, new_status):
+
+        # initialize parameters from config.txt
+        connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                                   database=Config.database_name)
+
+        # update the user's access status
+        connector.change_access(name=name, new_status=new_status)
 
 
 if __name__ == "__main__":

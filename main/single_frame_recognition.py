@@ -24,8 +24,8 @@ def run(image_path, font, font_size, distance):
         tested_image_embedding = detector.resnet(mtcnn)
 
         # initialize parameters from config.txt
-        mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password,
-                               database=Config.Database_name)
+        mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                               database=Config.database_name)
 
         database_users = mysql.select_all_users()
 

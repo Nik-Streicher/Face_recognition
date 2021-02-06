@@ -15,7 +15,7 @@ def run(font, distance=0.9, detection_delay=45, font_size=17, video_path=0):
     detector = FaceDetector()
 
     # initialize parameters from Config.py
-    mysql = MysqlConnector(host=Config.Host, user=Config.User, password=Config.Password, database=Config.Database_name)
+    mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password, database=Config.database_name)
 
     database_users = mysql.select_all_users()
 
