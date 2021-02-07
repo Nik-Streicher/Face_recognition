@@ -11,14 +11,14 @@ if platform.system() == 'Windows':
 
 # return list of recognized users in format -> [name, access]
 # "distance" defines the distance between the recognized faces.
-def recognize_users(face_embedding, users, distance):
+def recognize_users(face_embedding, users, accuracy):
     recognized_users = []
 
     for y in face_embedding:
         flag = True
         recognized_user = []
         for x in users:
-            if (y - x.get_embedding()).norm().item() < distance:
+            if (y - x.get_embedding()).norm().item() < accuracy:
                 # rewrite get_access
                 recognized_user = [x.get_name(), x.get_access()]
                 flag = False

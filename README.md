@@ -1,24 +1,34 @@
 # Face recognition
 
-Program for keeping records of people by using camera systems. 
+Program for keeping records of people by using a camera. 
 Based on face recognition, it verifies a person's identity and access level.
 
-**Now only for windows**
+## Preparation
+User must have permission to create and modify the database.
 
-Available programs
----
-1. To create a new database and table - [create_new_database.py](HELP/create_new_database-HELP.md)
-2. To save dataset to database - [dataset_uploader.py](HELP/dataset_uploader-HELP.md) 
-3. For face recognition in the image - [single_frame_recognition.py](HELP/single_frame_recognition-HELP.md) 
-4. For face recognition in the video stream - [videoStream_recognition.py](HELP/videoStream-HELP.md)
+1. Create a new database and table \
+`python Main.py create_database`
+2. Upload dataset to database \
+`python Main.py upload_dataset --dataset_path=images`
 
-Example
----
-### Before
-![markdown logo](images/multi/3.jpg)
+The dataset is composed of one folder of images per user. The name of each folder sets the user name.
 
-### After
-![markdown logo](images/recognized/3.PNG)
+## How to run
+You have two choices, either
+- run face recognition on a single frame \
+`python Main.py recognize_image images/Putin/1.jpg`
+- or from webcam stream \
+`python Main.py recognize_stream` \
+optionally, one can run detection in video by providing a path \
+`python Main.py recognize_stream --path_to_video=my_video`
+
+Unrecognized faces are labeled as "unknown". The bottom right corner corresponds to the access level (True=allowed or False=denied).
+
+- Access settings change: \
+`python Main.py update_access user_name False`
+
+
+![markdown logo](images/recognized/2.PNG)
 
 Tested on the system
 ---

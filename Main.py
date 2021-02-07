@@ -34,7 +34,7 @@ class Main:
 
         mysql.upload_dataset(users)
 
-    def recognize_image(self, image_path, font=Settings.font, distance=Settings.distance, font_size=Settings.font_size):
+    def recognize_image(self, image_path, font=Settings.font, accuracy=Settings.accuracy, font_size=Settings.font_size):
         detector = FaceDetector()
         tested_image = Image.open(image_path)
         #  tested image path -> images/multi/4.jpg
@@ -53,7 +53,7 @@ class Main:
 
             users = encode(database_users=database_users)
 
-            recognized_users = recognize_users(face_embedding=tested_image_embedding, users=users, distance=distance)
+            recognized_users = recognize_users(face_embedding=tested_image_embedding, users=users, accuracy=accuracy)
 
             boxes, _ = detector.mtcnn.detect(tested_image)
 
@@ -66,7 +66,7 @@ class Main:
         cv2.imshow("recognized Image", convert_to_cv(pil_image=tested_image))
         cv2.waitKey(0)
 
-    def recognize_stream(self, font=Settings.font, distance=Settings.distance, detection_delay=Settings.detection_delay,
+    def recognize_stream(self, font=Settings.font, accuracy=Settings.accuracy, detection_delay=Settings.detection_delay,
                          font_size=Settings.font_size, path_to_video=Settings.path_to_video):
         detector = FaceDetector()
 
@@ -94,7 +94,7 @@ class Main:
             if counter == 0:
                 if detect is not None:
                     img_embedding = detector.resnet(detect)
-                    recognized_users = recognize_users(face_embedding=img_embedding, users=users, distance=distance)
+                    recognized_users = recognize_users(face_embedding=img_embedding, users=users, accuracy=accuracy)
 
             image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=img,
                                       font_path=font,

@@ -85,7 +85,7 @@ class MysqlConnector:
         if new_status:
             val = "Allowed"
         else:
-            val = "Forbidden"
+            val = "Denied"
 
         self.cursor.execute(query, (val, name))
         self.database.commit()
