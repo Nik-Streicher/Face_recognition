@@ -37,7 +37,7 @@ class Main:
     def recognize_image(self, image_path, font=Settings.font, accuracy=Settings.accuracy, font_size=Settings.font_size):
         detector = FaceDetector()
         tested_image = Image.open(image_path)
-        #  tested image path -> images/multi/4.jpg
+        #  tested image path -> images/multi/3.jpg
         #  invalid picture path ->  images/invalid/1.jpg
 
         mtcnn = detector.mtcnn(tested_image)
@@ -117,7 +117,7 @@ class Main:
         connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
                                    database=Config.database_name)
 
-        # update the user's access status
+        # update the user's access restatus
         connector.change_access(name=name, new_status=new_status)
 
 
