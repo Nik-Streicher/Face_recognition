@@ -11,12 +11,11 @@ import sys
 
 class Main:
 
-    def create(self, database_name):
+    def create(self):
         # initialize parameters from Config.py
         connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password)
 
-        connector.create_new_database(database_name=database_name)
-        # database name -> "test_database"
+        connector.create_new_database(database_name=Config.database_name)
         connector.create_project_tables()
 
     def upload(self, dataset_path):
@@ -37,8 +36,8 @@ class Main:
     def recognize_image(self, image_path, font=Settings.font, accuracy=Settings.accuracy, font_size=Settings.font_size):
         detector = FaceDetector()
         tested_image = Image.open(image_path)
-        #  tested image path -> images/multi/3.jpg
-        #  invalid picture path ->  images/invalid/1.jpg
+        #  tested image path -> sample-images/multi/3.jpg
+        #  invalid picture path ->  sample-images/invalid/1.jpg
 
         mtcnn = detector.mtcnn(tested_image)
 
@@ -117,7 +116,7 @@ class Main:
         connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
                                    database=Config.database_name)
 
-        # update the user's access restatus
+        # update the user's access status
         connector.change_access(name=name, new_status=new_status)
 
 

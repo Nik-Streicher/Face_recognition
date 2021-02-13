@@ -7,9 +7,9 @@ Based on face recognition, it verifies a person's identity and access level.
 User must have permission to create and modify the database.
 
 1. Create a new database and table \
-`python Main.py create_database`
+`python Main.py create`
 2. Upload dataset to database \
-`python Main.py upload_dataset --dataset_path=images`
+`python Main.py upload --dataset_path=images`
 
 The dataset is composed of one folder of images per user. The name of each folder sets the user name.
 
@@ -24,11 +24,11 @@ optionally, one can run detection in video by providing a path \
 
 Unrecognized faces are labeled as "unknown". The bottom right corner corresponds to the access level (True=allowed or False=denied).
 
-- Access settings change: \
+- Change access privilege for a subject: \
 `python Main.py update_access user_name False`
 
 
-![markdown logo](images/recognized/2.PNG)
+![markdown logo](sample-images/recognized/2.PNG)
 
 Tested on the system
 ---
