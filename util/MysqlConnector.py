@@ -69,15 +69,23 @@ class MysqlConnector:
         return flag
 
     def create_new_database(self, database_name):
-        self.cursor.execute("CREATE DATABASE " + database_name)
-        self.database.database = database_name
-        print(database_name + " was created")
+        try:
+            self.cursor.execute("CREATE DATABASE " + database_name)
+            self.database.database = database_name
+            print(database_name + " was created")
+        except mysql.connector.errors.DatabaseError:
+            print("Database is already exists.")
 
     def create_project_tables(self):
-        self.cursor.execute(
-            "CREATE TABLE users (name_surname varchar(150) not null,embedding text not null,access varchar (25) null)"
-            "")
-        print("the tables has been created")
+        try:
+            self.cursor.execute(
+                "CREATE TABLE users (name_surname varchar(150) not null,embedding text not null,access varchar (25) "
+                "null) "
+                "")
+            print("the tables has been created")
+
+        except mysql.connector.errors.ProgrammingError:
+            pass
 
     def change_access(self, name, new_status):
         query = "UPDATE users SET access = %s WHERE name_surname LIKE %s"

@@ -34,36 +34,41 @@ class Main:
         mysql.upload_dataset(users)
 
     def recognize_image(self, image_path, font=Settings.font, accuracy=Settings.accuracy, font_size=Settings.font_size):
-        detector = FaceDetector()
-        tested_image = Image.open(image_path)
-        #  tested image path -> sample-images/multi/3.jpg
-        #  invalid picture path ->  sample-images/invalid/1.jpg
 
-        mtcnn = detector.mtcnn(tested_image)
+        try:
+            tested_image = Image.open(image_path)
+            detector = FaceDetector()
+            #  tested image path -> sample-images/multi/3.jpg
+            #  invalid picture path ->  sample-images/invalid/1.jpg
 
-        if mtcnn is not None:
-            tested_image_embedding = detector.resnet(mtcnn)
+            mtcnn = detector.mtcnn(tested_image)
 
-            # initialize parameters from config.txt
-            mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
-                                   database=Config.database_name)
+            if mtcnn is not None:
+                tested_image_embedding = detector.resnet(mtcnn)
 
-            database_users = mysql.select_all_users()
+                # initialize parameters from config.txt
+                mysql = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
+                                       database=Config.database_name)
 
-            users = encode(database_users=database_users)
+                database_users = mysql.select_all_users()
 
-            recognized_users = recognize_users(face_embedding=tested_image_embedding, users=users, accuracy=accuracy)
+                users = encode(database_users=database_users)
 
-            boxes, _ = detector.mtcnn.detect(tested_image)
+                recognized_users = recognize_users(face_embedding=tested_image_embedding, users=users,
+                                                   accuracy=accuracy)
 
-            tested_image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=tested_image,
-                                             font_path=font,
-                                             font_size=font_size)
-        else:
-            print("no face was detected")
+                boxes, _ = detector.mtcnn.detect(tested_image)
 
-        cv2.imshow("recognized Image", convert_to_cv(pil_image=tested_image))
-        cv2.waitKey(0)
+                tested_image = draw_bounding_box(boxes=boxes, recognized_users=recognized_users, pil_image=tested_image,
+                                                 font_path=font,
+                                                 font_size=font_size)
+            else:
+                print("no face was detected")
+
+            cv2.imshow("recognized Image", convert_to_cv(pil_image=tested_image))
+            cv2.waitKey(0)
+        except FileNotFoundError:
+            print(" No such file or directory: ", end=image_path)
 
     def recognize_stream(self, font=Settings.font, accuracy=Settings.accuracy, detection_delay=Settings.detection_delay,
                          font_size=Settings.font_size, path_to_video=Settings.path_to_video):
@@ -108,7 +113,7 @@ class Main:
             cv2.imshow("Video", convert_to_cv(image))
             if cv2.waitKey(1) & 0xFF == ord('f'):
                 print("Program has been closed")
-                sys.exit()
+                sys.exit(1)
 
     def update_access(self, name, new_status):
 
