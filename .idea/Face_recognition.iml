@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/resolution/legacy" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/cli" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/commands" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/distributions" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/index" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/models" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/operations" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/req" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_internal/vcs" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/urllib3/contrib" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/urllib3/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/cachecontrol" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/certifi" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/chardet" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/colorama" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/distlib" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/html5lib" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/idna" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/msgpack" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/packaging" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/pep517" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/pkg_resources" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/progress" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/requests" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/toml" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pip/_vendor/webencodings" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/pkg_resources/extern" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/setuptools/command" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Lib/site-packages/setuptools/extern" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Scripts" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.7 (Face_recognition)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

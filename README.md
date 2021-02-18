@@ -19,13 +19,17 @@ You have two choices, either
 `python Main.py recognize_image images/Putin/1.jpg`
 - or from webcam stream \
 `python Main.py recognize_stream` \
-optionally, one can run detection in video by providing a path \
-`python Main.py recognize_stream --path_to_video=my_video`
+optionally, one can run detection in video by change a path  in Settings.py 
+```python
+ # path to video sample (default camera=0)
+    path_to_video = 0
+```
 
-Unrecognized faces are labeled as "unknown". The bottom right corner corresponds to the access level (True=allowed or False=denied).
+Unrecognized faces are labeled as "unknown". The bottom right corner corresponds to the access level (True=Allowed or False=Denied).
 
 - Change access privilege for a subject: \
 `python Main.py update_access user_name False`
+  
 
 
 ![markdown logo](sample-images/recognized/2.PNG)

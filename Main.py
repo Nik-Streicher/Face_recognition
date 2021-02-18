@@ -121,7 +121,7 @@ class Main:
         connector = MysqlConnector(host=Config.host, user=Config.user, password=Config.password,
                                    database=Config.database_name)
 
-        # update the user's access status
+        # update the object's access status
         connector.change_access(name=name, new_status=new_status)
 
 

@@ -1,6 +1,8 @@
 import pickle
+import sys
 
 import mysql.connector
+import re
 from .User import User
 from tqdm import tqdm
 
@@ -69,10 +71,18 @@ class MysqlConnector:
         return flag
 
     def create_new_database(self, database_name):
+
+        if not re.match("^[0-9a-zA-Z_]+$", database_name):
+            print("ERROR - allowed characters are only a-z, A-Z, 0-9, \'_\'")
+            sys.exit(1)
+
         try:
-            self.cursor.execute("CREATE DATABASE " + database_name)
+            query = "CREATE DATABASE " + database_name
+            self.cursor.execute(query)
+
             self.database.database = database_name
             print(database_name + " was created")
+
         except mysql.connector.errors.DatabaseError:
             print("Database is already exists.")
 
@@ -88,13 +98,20 @@ class MysqlConnector:
             pass
 
     def change_access(self, name, new_status):
-        query = "UPDATE users SET access = %s WHERE name_surname LIKE %s"
 
-        if new_status:
-            val = "Allowed"
+        query = "SELECT name_surname FROM users WHERE name_surname LIKE %s"
+        self.cursor.execute(query, (name,))
+
+        if len(self.cursor.fetchall()) != 0:
+            query = "UPDATE users SET access = %s WHERE name_surname LIKE %s"
+
+            if new_status:
+                val = "Allowed"
+            else:
+                val = "Denied"
+
+            self.cursor.execute(query, (val, name))
+            self.database.commit()
+            print("Status updated")
         else:
-            val = "Denied"
-
-        self.cursor.execute(query, (val, name))
-        self.database.commit()
-        print("Status updated")
+            print("The subject is not in the database.")
